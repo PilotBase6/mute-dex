@@ -1,23 +1,37 @@
-"use client"
+"use client";
+import { useState, useEffect } from "react";
+
 import LoadButton from "@/components/buttons/loadButton";
-import { useState } from "react";
+import PokeList from "@/components/cards/pokeList";
+
+import { fetchPokeAPI } from "@/lib/fetchPokeAPI";
 
 interface PokemonPaginationProps {
-  limitPage?: number;
+  initialLimit: number;
 }
 
-const PokemonPagination =  ({ limitPage }: PokemonPaginationProps) => {
-    const [limitPokePage, setLimitPokePage] = useState<number>(limitPage??20);
-  console.log(limitPage);
+const PokemonPagination = ({ initialLimit }: PokemonPaginationProps) => {
+  const [limitPage, setLimitPage] = useState<number>(initialLimit);
+  const [data, setData] = useState<{ results: { name: string; url: string; }[], limit: number }>();
 
-  const loadMore = async () => {
-    setLimitPokePage(limitPokePage + 20);
+  useEffect(() => {
+    const loadData = async () => {
+      const result = await fetchPokeAPI({ limit: limitPage });
+      setData(result);
+    };
+    loadData();
+  }, [limitPage]);
+
+  const loadMore = () => {
+    setLimitPage(limitPage + 20);
   };
 
-    
   return (
-    <div className="flex justify-center mt-4">
-      <LoadButton loadMore={loadMore}>Cargar más</LoadButton>
+    <div>
+      {data && <PokeList data={data} />}
+      <div className="flex justify-center mt-4">
+        <LoadButton loadMore={loadMore}>Cargar más</LoadButton>
+      </div>
     </div>
   );
 };
