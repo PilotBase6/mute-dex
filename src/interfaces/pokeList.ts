@@ -4,6 +4,7 @@ export interface PokeListProps {
         results: {
             name: string;
             url: string;
+            index: number;
         }[];
     }
 }

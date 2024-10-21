@@ -1,36 +1,37 @@
 "use client";
-import { useState, useEffect } from "react";
-
 import LoadButton from "@/components/buttons/loadButton";
-import PokeList from "@/components/cards/pokeList";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useRef } from "react";
 
-import { fetchPokeAPI } from "@/lib/fetchPokeAPI";
+// interface PokemonPaginationProps {
+//   initialLimit: number;
+// }
 
-interface PokemonPaginationProps {
-  initialLimit: number;
-}
+const PokemonPagination = () => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const ref = useRef<number>(0);
 
-const PokemonPagination = ({ initialLimit }: PokemonPaginationProps) => {
-  const [limitPage, setLimitPage] = useState<number>(initialLimit);
-  const [data, setData] = useState<{ results: { name: string; url: string; }[], limit: number }>();
-
-  useEffect(() => {
-    const loadData = async () => {
-      const result = await fetchPokeAPI({ limit: limitPage });
-      setData(result);
-    };
-    loadData();
-  }, [limitPage]);
+  const initialLimit = 20;
+  const limitPage = searchParams.get("limit")
+    ? Number(searchParams.get("limit"))
+    : initialLimit;
 
   const loadMore = () => {
-    setLimitPage(limitPage + 20);
+    ref.current = window.scrollY;
+    router.replace(`/?limit=${limitPage + 20}`);
   };
+
+  useEffect(() => {
+    window.scrollTo({ top: ref.current });
+  }, [limitPage]);
 
   return (
     <div>
-      {data && <PokeList data={data} />}
       <div className="flex justify-center mt-4">
-        <LoadButton loadMore={loadMore}>Cargar más</LoadButton>
+        <LoadButton disabled={limitPage >= 1025} loadMore={loadMore}>
+          Cargar más
+        </LoadButton>
       </div>
     </div>
   );

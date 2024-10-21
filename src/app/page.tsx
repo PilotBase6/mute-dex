@@ -1,11 +1,16 @@
 import CardList from "@/components/cards/cardList";
 
-export default function Home() {
+export default async function Home({searchParams}: {searchParams: { [key: string]: string | undefined }}) {
+  const limit = searchParams['limit']?? 20;
+  const search = searchParams['search']?? '';
+  const limitPage = Number(limit);
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="container flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <h1 className="text-4xl font-bold text-blue-500">Pokedex</h1>
-        <CardList />
+    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 sm:p-[0rem,5rem,5rem,5rem] font-[family-name:var(--font-geist-sans)]">
+      <main className="container flex flex-col justify-center gap-12 row-start-2 items-center">
+        <h1 className="text-6xl font-bold bg-gradient-to-r from-red-500 to-blue-500 text-transparent bg-clip-text">
+          MUTA PokeDex
+        </h1>
+        <CardList limit={limitPage} search={search} />
       </main>
     </div>
   );
