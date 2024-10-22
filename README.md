@@ -3,7 +3,6 @@ Prueba técnica para MUTA donde se crea un FrontEnd (React.js, Next.js, Tailwind
 
 ## Deployment
 Visualizar proyecto en producción por medio del siguiente dominio:
-
     ```bash
     https://mute-dex.pilotbase6.com/
     ```
