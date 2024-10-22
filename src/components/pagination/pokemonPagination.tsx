@@ -3,10 +3,6 @@ import LoadButton from "@/components/buttons/loadButton";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef } from "react";
 
-// interface PokemonPaginationProps {
-//   initialLimit: number;
-// }
-
 const PokemonPagination = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
