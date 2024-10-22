@@ -2,6 +2,8 @@
 import PokemonPagination from "@/components/pagination/pokemonPagination";
 import { fetchPokeAPI } from "@/lib/fetchPokeAPI";
 import PokeList from "@/components/cards/pokeList";
+import NoDataAlert from "@/components/alert/noDataAlert";
+import ErrorAlert from "../alert/errorAlert";
 
 const CardList = async ({
   limit,
@@ -10,41 +12,33 @@ const CardList = async ({
   limit: number;
   search: string;
 }) => {
-  const data = await fetchPokeAPI({ limit, search });
+  try {
+    const data = await fetchPokeAPI({ limit, search });
 
-  return (
-    <div className="relative flex flex-col gap-y-10">
-      {/* <div className="flex flex-col items-center justify-center bg-[#F2F2F2] text-gray-800 px-6 py-4 rounded-lg max-w-md mx-auto">
-        <img
-          src="/gif-nodata.gif"
-          alt="Pika crying"
-          className="w-4/5 h-40 mb-4 object-cover"
-        />
-        <h2 className="text-xl mb-2 font-bold bg-gradient-to-r from-red-700 to-blue-700 hover:from-blue-600 hover:to-red-600 text-transparent bg-clip-text">
-          Pokémon no encontrado!
-        </h2>
-        <p className="text-center text-gray-600">
-          Ningún Pokémon coincide con tus criterios de búsqueda. ¡Intenta
-          ajustar tu búsqueda!
-        </p>
+    if (!data || data.results.length === 0) {
+      return (
+        <div className="relative flex flex-col gap-y-10">
+          <NoDataAlert />
+          <PokemonPagination />
+        </div>
+      );
+    }
+
+    return (
+      <div className="relative flex flex-col gap-y-10">
+        <PokeList data={data} />
+        <PokemonPagination />
       </div>
-
-      <div className="flex flex-col items-center justify-center bg-[#F2F2F2] text-gray-800 px-6 py-4 rounded-lg  max-w-md mx-auto">
-        <img
-          src="/gif-nodata.gif"
-          alt="Pikachu crying"
-          className="w-4/5 h-40 mb-4 object-cover"
-        />
-        <h2 className="text-xl text-center font-bold bg-gradient-to-r from-red-700 to-blue-700 hover:from-blue-600 hover:to-red-600 text-transparent bg-clip-text mb-2">
-          ¡Oh no! Algo salió mal...
-        </h2>
-        <p className="text-center text-gray-600">Mensaje de error</p>
-      </div> */}
-
-      <PokeList data={data} />
-      <PokemonPagination />
-    </div>
-  );
+    );
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  } catch (error) {
+    return (
+      <div className="relative flex flex-col gap-y-10">
+        <ErrorAlert message="Ocurrió un error al obtener los datos de Pokémon. Por favor, inténtelo de nuevo más tarde." />
+        <PokemonPagination />
+      </div>
+    );
+  }
 };
 
 export default CardList;

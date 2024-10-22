@@ -7,7 +7,6 @@ interface PokeInfoPageProps {
   }
 
 const PokeInfoPage = ({ params}: PokeInfoPageProps) => {
-    console.log(params.id);
   return (
     <div>
       <PokeInfo id={params.id}/>
