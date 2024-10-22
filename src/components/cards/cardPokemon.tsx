@@ -6,10 +6,10 @@ interface CardPokemonProps {
 
 const CardPokemon = ({ name, image, linkInfo }: CardPokemonProps) => {
   return (
-    <div className="group relative w-full max-w-sm bg-[#F2F2F2] rounded-lg shadow-md border-t transition-all delay-500">
+    <div className="group relative w-full max-w-48 md:max-w-sm bg-[#F2F2F2] rounded-lg shadow-md border-t transition-all delay-500">
       <a href={linkInfo}>
         <img
-          className="w-full h-48 md:h-auto object-cover rounded-lg p-6 group-hover:scale-[120%] transition-transform duration-500"
+          className="w-full h-48 md:max-h-auto md:h-auto object-cover rounded-lg p-6 group-hover:scale-[120%] transition-transform duration-500"
           src={image}
           alt={name}
         />

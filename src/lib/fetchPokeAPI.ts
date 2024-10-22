@@ -62,8 +62,6 @@ export const fetchPokeInfo = async (id: string) => {
     const height = data.height;
     const weight = data.weight;
 
-    console.log(name, image, abilities, types, height, weight);
-
     return { name, image, abilities, types, height, weight };
   } catch (error) {
     console.error("Failed to fetch Pokemon info:", error);
