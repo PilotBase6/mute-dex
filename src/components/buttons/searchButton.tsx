@@ -19,7 +19,7 @@ const SearchButton = () => {
     <>
       <button
         onClick={() => setSearchOpen(!searchOpen)}
-        className={`${searchOpen? "border-blue-700" : "border-red-700"} w-14 h-14 flex fixed justify-center items-center font-bold bottom-8 right-8 bg-white text-blue-700 border-[1px] border-red-700 rounded-full z-30 transition-transform duration-500 ease-in-out`}
+        className={`${searchOpen? "border-blue-700" : "border-red-700"} w-14 h-14 flex fixed justify-center items-center font-bold bottom-8 right-8 bg-white text-blue-700 border-[1px] rounded-full z-30 transition-transform duration-500 ease-in-out`}
         aria-label="Toggle Search"
         style={{
           transform: searchOpen ? "rotate(40deg)" : "rotate(0deg)",
@@ -32,6 +32,7 @@ const SearchButton = () => {
         className={`${
           searchOpen ? "w-64 h-12" : "w-14 h-14"
         } fixed bottom-8 right-8 z-20 bg-white border-[1px] border-blue-700 rounded-full overflow-hidden shadow-lg transition-all duration-500 ease-in-out flex items-center`}
+        aria-label="search-bar"
       >
         <form
           className={`flex items-center transition-opacity duration-300 ${
