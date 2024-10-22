@@ -1,3 +1,5 @@
+
+
 export const fetchPokeAPI = async ({
   limit = 20,
   search,
@@ -38,29 +40,33 @@ export const fetchPokeAPI = async ({
     });
 
     return { results: results, limit: limit };
-  } catch (error: unknown) {
-    const errorMessage = error instanceof Error ? error.message : String(error);
-    console.error("Failed to fetch data from PokeAPI:", errorMessage);
-    return { results: [], limit: limit, error: errorMessage };
+  } catch (error) {
+    console.error("Failed to fetch data from PokeAPI:", error );
+    return { results: [], limit: limit, error: error };
   }
 };
 
 export const fetchPokeInfo = async (id: string) => {
-  const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
-  const data = await response.json();
+  try {
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
+    const data = await response.json();
 
-  const name = data.forms[0].name;
-  const image = data.sprites.other["home"].front_default;
-  const abilities = data.abilities.map(
-    (ability: { ability: { name: string } }) => ability.ability.name
-  );
-  const types = data.types.map(
-    (type: { type: { name: string } }) => type.type.name
-  );
-  const height = data.height;
-  const weight = data.weight;
+    const name = data.forms[0].name;
+    const image = data.sprites.other["home"].front_default;
+    const abilities = data.abilities.map(
+      (ability: { ability: { name: string } }) => ability.ability.name
+    );
+    const types = data.types.map(
+      (type: { type: { name: string } }) => type.type.name
+    );
+    const height = data.height;
+    const weight = data.weight;
 
-  console.log(name, image, abilities, types, height, weight);
+    console.log(name, image, abilities, types, height, weight);
 
-  return { name, image, abilities, types, height, weight };
+    return { name, image, abilities, types, height, weight };
+  } catch (error) {
+    console.error("Failed to fetch Pokemon info:", error);
+    return { name: "", image: "", abilities: [], types: [], height: 0, weight: 0, error: error };
+  }
 };
