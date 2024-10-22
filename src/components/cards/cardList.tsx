@@ -17,7 +17,7 @@ const CardList = async ({
 
     if (!data || data.results.length === 0) {
       return (
-        <div className="relative flex flex-col gap-y-10">
+        <div className="relative flex flex-col gap-y-10 -mt-24">
           <NoDataAlert />
           <PokemonPagination />
         </div>
@@ -33,7 +33,7 @@ const CardList = async ({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
     return (
-      <div className="relative flex flex-col gap-y-10">
+      <div className="relative flex flex-col gap-y-10 -mt-24">
         <ErrorAlert message="Ocurrió un error al obtener los datos de Pokémon. Por favor, inténtelo de nuevo más tarde." />
         <PokemonPagination />
       </div>

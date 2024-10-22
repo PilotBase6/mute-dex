@@ -2,7 +2,7 @@ import React from "react";
 
 const NoDataAlert = () => {
   return (
-    <div className="flex flex-col items-center justify-center bg-[#F2F2F2] text-gray-800 px-6 py-4 rounded-lg max-w-md mx-auto">
+    <div className="flex flex-col items-center justify-center bg-[#F2F2F2] text-gray-800 px-6 py-4  rounded-lg max-w-md mx-auto">
       <img
         src="/gif-nodata.gif"
         alt="Pika crying"
