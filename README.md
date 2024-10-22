@@ -1,11 +1,12 @@
+![Banner PokeDex](public/banner.png)
+
 ## Descripción
 Prueba técnica para MUTA donde se crea un FrontEnd (React.js, Next.js, TailwindCSS) con API de Pokemon, este proyecto renderiza las cartas de la pokedex del lado del servidor, lo que ayuda en el indexado del proyecto.
 
 ## Deployment
 Visualizar proyecto en producción por medio del siguiente dominio:
-    ```bash
+
     https://mute-dex.pilotbase6.com/
-    ```
 
 El proyecto está diseñado para mostrar la lista de Pokemones hasta 1025 ejemplares:
 1. **Lista de Pokemones**: fetch obtenido desde el servidor, con un limite inicial de 20 Pokemones.
